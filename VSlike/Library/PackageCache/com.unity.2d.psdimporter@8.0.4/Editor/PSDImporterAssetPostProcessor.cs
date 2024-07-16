@@ -1,3 +1,30 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:3dcff2b6d421556aca11ee4129e79c17daf93face24e67f3d57e638cfd626a4e
-size 949
+using System.Collections.Generic;
+
+namespace UnityEditor.U2D.PSD
+{
+    class PSDImporterAssetPostProcessor : AssetPostprocessor
+    {
+        static List<PSDImporter> s_AssetImporter; 
+        public override int GetPostprocessOrder() => int.MinValue;
+
+        void OnPreprocessAsset()
+        {
+            if (assetImporter is PSDImporter)
+            {
+                if(s_AssetImporter == null)
+                    s_AssetImporter = new List<PSDImporter>();
+                s_AssetImporter.Add((PSDImporter)assetImporter);   
+            }
+        }
+
+        internal static bool ContainsImporter(PSDImporter importer)
+        {
+            return s_AssetImporter == null ? false : s_AssetImporter.Contains(importer);
+        }
+        
+        static void OnPostprocessAllAssets(string[] importedAssets, string[] deletedAssets, string[] movedAssets, string[] movedFromAssetPaths)
+        {
+            s_AssetImporter = null;
+        }
+    }
+}

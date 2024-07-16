@@ -1,3 +1,23 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:f660e34d970a8ce5934c9952e83769f3f0847b2fb88586348fa1134332838279
-size 663
+﻿using UnityEditor;
+
+namespace Unity.U2D.Animation.Sample
+{
+    // Ensure class initializer is called whenever scripts recompile
+    [InitializeOnLoadAttribute]
+    internal static class BuildAssetBundle
+    {
+        // Register an event handler when the class is initialized
+        static BuildAssetBundle()
+        {
+            EditorApplication.playModeStateChanged += PlayModeStateChange;
+        }
+
+        private static void PlayModeStateChange(PlayModeStateChange state)
+        {
+            if (state == UnityEditor.PlayModeStateChange.ExitingEditMode)
+            {
+                LoadSwapDLC.BuildAssetBundles();
+            }
+        }
+    }
+}

@@ -1,3 +1,4 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:104d52a3479f376f9a8b6f3510e2f0e0b6e3cd4905fc69f51c2db2f28acf5d06
-size 265
+using System.Runtime.CompilerServices;
+[assembly: InternalsVisibleTo("Unity.2D.SpriteShape.Editor")]
+[assembly: InternalsVisibleTo("Unity.2D.SpriteShape.Tests.EditorTests")]
+[assembly: InternalsVisibleTo("Unity.RenderPipelines.Universal.2D.ShadowProvider.Runtime")]

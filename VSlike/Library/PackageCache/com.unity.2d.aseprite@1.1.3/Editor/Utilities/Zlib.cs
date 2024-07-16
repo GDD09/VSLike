@@ -1,3 +1,26 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:7c60457c9efbe324bf0801c60aaa851785c4caf743b00dbaa4f2d74fba22b985
-size 785
+using System.IO;
+using System.IO.Compression;
+
+namespace UnityEditor.U2D.Aseprite
+{
+    internal static class Zlib
+    {
+        public static byte[] Decompress(byte[] compressedData)
+        {
+            byte[] decompressedData;
+            using (var decompressedStream = new MemoryStream())
+            {
+                using (var compressStream = new MemoryStream(compressedData))
+                {
+                    using (var deflateStream = new DeflateStream(compressStream, CompressionMode.Decompress))
+                    {
+                        deflateStream.CopyTo(decompressedStream);
+                    }
+                }
+        
+                decompressedData = decompressedStream.ToArray();
+            }
+            return decompressedData;
+        }
+    }
+}

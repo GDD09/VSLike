@@ -1,3 +1,19 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:d005b7b8bf4f92799b492b97fb9d849209d35ce543132ace69d2ca6635fd56b1
-size 557
+using UnityEngine.UIElements;
+
+namespace UnityEditor.Tilemaps
+{
+    internal class GridPaintPaletteWindowActiveTargets : VisualElement
+    {
+        const string kUssClassName = "unity-tilepalette-activetargets";
+
+        public GridPaintPaletteWindowActiveTargets()
+        {
+            AddToClassList(kUssClassName);
+            TilePaletteOverlayUtility.SetStyleSheet(this);
+
+            name = "activeTargetsTilePalette";
+            Add(new TilePaletteActiveTargetsPopupIcon());
+            Add(new TilePaletteActiveTargetsPopup());
+        }
+    }
+}

@@ -1,3 +1,26 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:17c63e73d1756c10ef03ff1be32e377c01ac3fe844f735af5a496cd4dd09699e
-size 691
+{
+    "name": "Unity.2D.Psdimporter.Editor",
+    "rootNamespace": "",
+    "references": [
+        "PsdPlugin",
+        "Unity.InternalAPIEditorBridge.001",
+        "Unity.2D.Common.Editor",
+        "Unity.2D.Animation.Editor",
+        "Unity.2D.Animation.Runtime",
+        "Unity.2D.Sprite.Editor",
+        "Unity.Mathematics",
+        "Unity.Burst",
+        "Unity.InternalAPIEngineBridge.001"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": true,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

@@ -1,3 +1,29 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:6137c28feb19c401d51318a405869d18c9b1638c080266df0a104922d9f52894
-size 754
+{
+    "name": "Unity.2D.Animation.Samples.Runtime",
+    "rootNamespace": "",
+    "references": [
+        "UnityEngine.UI",
+        "Unity.2D.Animation.Runtime",
+        "Unity.2D.IK.Runtime"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [
+        {
+            "name": "com.unity.modules.assetbundle",
+            "expression": "0.0.1",
+            "define": "ASSETBUNDLE_ENABLED"
+        },
+        {
+            "name": "com.unity.ugui",
+            "expression": "0.0.1",
+            "define": "UGUI_ENABLED"
+        }
+    ],
+    "noEngineReferences": false
+}

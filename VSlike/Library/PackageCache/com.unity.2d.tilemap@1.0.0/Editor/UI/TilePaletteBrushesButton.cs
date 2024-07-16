@@ -1,3 +1,75 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:e64400953d599616f6c55ba11dfd5b81c2e37280068b9ac07f84f999e43f4eb0
-size 2692
+using UnityEditor.Toolbars;
+using UnityEngine;
+using UnityEngine.UIElements;
+
+namespace UnityEditor.Tilemaps
+{
+    /// <summary>
+    /// Dropdown Button for selecting the Active Brush for Grid Painting.
+    /// </summary>
+    [EditorToolbarElement(k_ToolbarId)]
+    public sealed class TilePaletteBrushesButton : EditorToolbarDropdown
+    {
+        /// <summary>
+        /// Factory for TilePaletteBrushesButton.
+        /// </summary>
+        public class TilePaletteBrushesButtonFactory : UxmlFactory<TilePaletteBrushesButton, TilePaletteBrushesButtonUxmlTraits> {}
+        /// <summary>
+        /// UxmlTraits for TilePaletteBrushesButton.
+        /// </summary>
+        public class TilePaletteBrushesButtonUxmlTraits : UxmlTraits {}
+
+        private new static readonly string ussClassName = "unity-tilepalette-brushes-button";
+
+        internal const string k_ToolbarId = "Tile Palette/Brushes Button";
+        private const string k_IconPath = "Packages/com.unity.2d.tilemap/Editor/Icons/Tilemap.DefaultBrush.png";
+
+        private Texture2D m_DefaultIcon;
+
+        /// <summary>
+        /// Initializes and returns an instance of TilePaletteBrushesButton.
+        /// </summary>
+        public TilePaletteBrushesButton()
+        {
+            AddToClassList(ussClassName);
+            TilePaletteOverlayUtility.SetStyleSheet(this);
+            m_DefaultIcon = EditorGUIUtility.LoadIcon(k_IconPath);
+            icon = m_DefaultIcon;
+
+            RegisterCallback<AttachToPanelEvent>(OnAttachedToPanel);
+            RegisterCallback<DetachFromPanelEvent>(OnDetachFromPanel);
+
+            clicked += OnClicked;
+        }
+
+        private void OnAttachedToPanel(AttachToPanelEvent evt)
+        {
+            GridPaintingState.brushChanged += OnBrushChanged;
+            UpdateBrush();
+        }
+
+        private void OnBrushChanged(GridBrushBase obj)
+        {
+            UpdateBrush();
+        }
+
+        private void OnDetachFromPanel(DetachFromPanelEvent evt)
+        {
+            GridPaintingState.brushChanged -= OnBrushChanged;
+        }
+
+        private void UpdateBrush()
+        {
+            var defaultTooltip = TilePaletteBrushesLabel.kNullBrushName;
+            var defaultIcon = m_DefaultIcon;
+            tooltip = GridPaintingState.gridBrush != null ? GridPaintingState.gridBrush.name : defaultTooltip;
+            icon = GridPaintingState.activeBrushEditor != null && GridPaintingState.activeBrushEditor.icon != null ? GridPaintingState.activeBrushEditor.icon : defaultIcon;
+        }
+
+        private void OnClicked()
+        {
+            IGenericMenu menu = new TilePaletteBrushesDropdownMenu();
+            menu.DropDown(worldBound, this, true);
+        }
+    }
+}

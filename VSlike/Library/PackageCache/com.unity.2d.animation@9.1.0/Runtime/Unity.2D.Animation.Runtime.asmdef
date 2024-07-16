@@ -1,3 +1,26 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:5b821436dbf2a973b5866534b0cbbdcfaee65a620dd9b3d5a33cfaca80d16fd7
-size 681
+{
+    "name": "Unity.2D.Animation.Runtime",
+    "rootNamespace": "",
+    "references": [
+        "Unity.2D.Common.Runtime",
+        "Unity.InternalAPIEngineBridge.001",
+        "Unity.Mathematics",
+        "Unity.Burst",
+        "Unity.Collections"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": true,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [
+        {
+            "name": "com.unity.collections",
+            "expression": "2.0.0-exp",
+            "define": "COLLECTIONS_2_0_OR_ABOVE"
+        }
+    ],
+    "noEngineReferences": false
+}

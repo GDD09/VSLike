@@ -1,3 +1,19 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:1096d7b8e27d93ccedc8e3d3a9160e50f504c40f9c7381e6439f7b20187f74b7
-size 537
+using UnityEditor.Animations;
+
+namespace UnityEditor.U2D.Aseprite.Common
+{
+    internal static class AnimatorControllerHelper
+    {
+        [Callbacks.OnOpenAsset]
+        static bool OnOpenAsset(int instanceID, int line)
+        {
+            var controller = EditorUtility.InstanceIDToObject(instanceID) as AnimatorController;
+            if (controller)
+            {
+                EditorApplication.ExecuteMenuItem("Window/Animation/Animator");
+                return true;
+            }
+            return false;
+        }
+    }
+}

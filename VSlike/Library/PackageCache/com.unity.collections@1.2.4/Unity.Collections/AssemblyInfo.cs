@@ -1,3 +1,24 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:80e7c6ba4a11f28194a300ef3b2f2ebcf5077d846ce487a2430954e9a52e5ff9
-size 1300
+using System.Runtime.CompilerServices;
+
+[assembly: InternalsVisibleTo("Unity.Burst.Tests")]
+[assembly: InternalsVisibleTo("Unity.Collections.BurstCompatibilityTestCodeGen")]
+[assembly: InternalsVisibleTo("Unity.Collections.Tests")]
+[assembly: InternalsVisibleTo("Unity.Entities")]
+[assembly: InternalsVisibleTo("Unity.Entities.CodeGen")]
+[assembly: InternalsVisibleTo("Unity.Entities.Tests")]
+[assembly: InternalsVisibleTo("Unity.Entities.Editor")]
+[assembly: InternalsVisibleTo("Unity.Entities.Editor.Tests")]
+[assembly: InternalsVisibleTo("Unity.Rendering.Hybrid")]
+[assembly: InternalsVisibleTo("Unity.Runtime")]
+[assembly: InternalsVisibleTo("Unity.Runtime.Tests")]
+[assembly: InternalsVisibleTo("Unity.Runtime.IO.Tests")]
+[assembly: InternalsVisibleTo("Unity.Runtime.UnityInstance")]
+[assembly: InternalsVisibleTo("Unity.Tiny.Animation")]
+[assembly: InternalsVisibleTo("Unity.Tiny.Core.Tests")]
+[assembly: InternalsVisibleTo("Unity.Tiny.GameSave")]
+[assembly: InternalsVisibleTo("Unity.Tiny.GameSave.Tests")]
+[assembly: InternalsVisibleTo("Unity.Tiny.Rendering.Native")]
+[assembly: InternalsVisibleTo("Unity.Scenes")]
+[assembly: InternalsVisibleTo("Unity.Scenes.Editor")]
+[assembly: InternalsVisibleTo("Samples.GridPath.Tests")]
+[assembly: InternalsVisibleTo("Unity.Entities.PerformanceTests")]

@@ -1,3 +1,16 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:359e7538d4aa669130778ba457ec9095c6dc36a6f79d173fa92ff327719f073b
-size 480
+using System.IO;
+
+namespace UnityEditor.U2D.Aseprite
+{
+    /// <summary>
+    /// Parsed representation of an Aseprite ExternalFiles chunk.
+    /// </summary>
+    /// <note>Not supported yet.</note>
+    internal class ExternalFilesChunk : BaseChunk
+    {
+        public override ChunkTypes chunkType => ChunkTypes.ExternalFiles;
+
+        internal ExternalFilesChunk(uint chunkSize) : base(chunkSize) { }
+        protected override void InternalRead(BinaryReader reader) { }
+    }
+}

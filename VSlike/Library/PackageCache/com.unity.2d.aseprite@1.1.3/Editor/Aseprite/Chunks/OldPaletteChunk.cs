@@ -1,3 +1,53 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:b516bac88090bbe2b6d60c0120aa11b0a1188131faa40d864c476df65f42314f
-size 1852
+using System.Collections.Generic;
+using System.IO;
+using System.Collections.ObjectModel;
+using UnityEngine;
+
+namespace UnityEditor.U2D.Aseprite
+{
+    /// <summary>
+    /// Parsed representation of an Aseprite Old Palette chunk.
+    /// </summary>
+    /// <note>Not supported yet.</note>
+    internal class OldPaletteChunk : BaseChunk, IPaletteProvider
+    {
+        public override ChunkTypes chunkType => ChunkTypes.OldPalette;
+        
+        /// <summary>
+        /// Array of palette entries.
+        /// </summary>
+        public ReadOnlyCollection<PaletteEntry> entries => System.Array.AsReadOnly(m_Entries);
+        PaletteEntry[] m_Entries;   
+        
+        internal OldPaletteChunk(uint chunkSize) : base(chunkSize) { }
+
+        protected override void InternalRead(BinaryReader reader)
+        {
+            var noOfPackets = reader.ReadUInt16();
+            var colorEntries = new List<PaletteEntry>();
+            
+            var colorIndex = 0;
+            for (var i = 0; i < noOfPackets; ++i)
+            {
+                var noOfColorsToSkip = reader.ReadByte();
+                colorIndex += noOfColorsToSkip;
+                
+                int noOfColorsInEntry = reader.ReadByte();
+                if (noOfColorsInEntry == 0)
+                    noOfColorsInEntry = 256;
+                
+                // If j + colorIndex >= 256 it means that the color chunk is invalid, so we stop reading.
+                for (var j = 0; j < noOfColorsInEntry && (j + colorIndex < 256); ++j)
+                {
+                    var r = reader.ReadByte();
+                    var g = reader.ReadByte();
+                    var b = reader.ReadByte();
+
+                    colorEntries.Add(new PaletteEntry("", new Color32(r, g, b, 255)));
+                }
+            }
+
+            m_Entries = colorEntries.ToArray();
+        }
+    }
+}

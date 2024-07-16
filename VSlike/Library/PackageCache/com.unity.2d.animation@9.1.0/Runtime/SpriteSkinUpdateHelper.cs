@@ -1,3 +1,33 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:3e8d4ae301287850c9dec9baab021b00cfafbf7a882968f5f85a5268b4df2202
-size 893
+﻿using Unity.Profiling;
+
+namespace UnityEngine.U2D.Animation
+{
+    [AddComponentMenu("")]
+    [DefaultExecutionOrder(-1)]
+    [ExecuteInEditMode]
+    internal class SpriteSkinUpdateHelper : MonoBehaviour
+    {
+        public System.Action<GameObject> onDestroyingComponent
+        {
+            get; 
+            set;
+        }
+        
+        ProfilerMarker m_ProfilerMarker = new ProfilerMarker("SpriteSkinUpdateHelper.LateUpdate");
+
+        void OnDestroy() => onDestroyingComponent?.Invoke(gameObject);
+
+        void LateUpdate()
+        {
+            if (SpriteSkinComposite.instance.helperGameObject != gameObject)
+            {
+                GameObject.DestroyImmediate(gameObject);
+                return;
+            }
+            
+            m_ProfilerMarker.Begin();
+            SpriteSkinComposite.instance.LateUpdate();
+            m_ProfilerMarker.End();
+        }
+    }
+}

@@ -1,3 +1,83 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:70c08910d225360b8e7f8a5e861b106642ee9ba5031a49d363d3b83669882770
-size 2474
+using System;
+using UnityEngine;
+using UnityEngine.UIElements;
+
+namespace UnityEditor.Tilemaps
+{
+    internal class TilePaletteBrushesLabel : TextElement
+    {
+        public static string kNullBrushName = L10n.Tr("No Valid Brush");
+        public static string kLabelTooltip =
+            L10n.Tr("Specifies the currently active Brush used for painting in the Scene View.");
+
+        private bool m_AppendSettings;
+        public bool appendSettings
+        {
+            get { return m_AppendSettings; }
+            set
+            {
+                m_AppendSettings = value;
+                style.unityFontStyleAndWeight = m_AppendSettings ? FontStyle.Bold : FontStyle.Normal;
+            }
+        }
+
+        public class
+            TilePaletteBrushesLabelFactory : UxmlFactory<TilePaletteBrushesLabel, TilePaletteBrushesLabelUxmlTraits>
+        {
+        }
+
+        public class TilePaletteBrushesLabelUxmlTraits : UxmlTraits
+        {
+        }
+
+        /// <summary>
+        /// USS class name of elements of this type.
+        /// </summary>
+        public new static readonly string ussClassName = "unity-tilepalette-brushes-label";
+
+        /// <summary>
+        /// Initializes and returns an instance of TilePaletteBrushesLabel.
+        /// </summary>
+        public TilePaletteBrushesLabel()
+        {
+            AddToClassList(ussClassName);
+            TilePaletteOverlayUtility.SetStyleSheet(this);
+            tooltip = kLabelTooltip;
+
+            RegisterCallback<AttachToPanelEvent>(OnAttachedToPanel);
+            RegisterCallback<DetachFromPanelEvent>(OnDetachFromPanel);
+        }
+
+        private void OnAttachedToPanel(AttachToPanelEvent evt)
+        {
+            GridPaintingState.brushChanged += OnBrushChanged;
+            UpdateBrush();
+        }
+
+        private void OnBrushChanged(GridBrushBase obj)
+        {
+            UpdateBrush();
+        }
+
+        private void OnDetachFromPanel(DetachFromPanelEvent evt)
+        {
+            GridPaintingState.brushChanged -= OnBrushChanged;
+        }
+
+        private string FormatBrushName(GridBrushBase brush)
+        {
+            if (brush != null)
+            {
+                if (appendSettings)
+                    return String.Format("{0} Settings", brush.name);
+                return brush.name;
+            }
+            return kNullBrushName;
+        }
+
+        private void UpdateBrush()
+        {
+            text = FormatBrushName(GridPaintingState.gridBrush);
+        }
+    }
+}

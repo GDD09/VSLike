@@ -1,3 +1,27 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:279ed0e492ba5559903ba7d8dbd9b269c36cf9d831b356aa723803a091d3198d
-size 714
+﻿using Codice.Client.Common.FsNodeReaders;
+using Codice.CM.Common;
+using Codice.LogWrapper;
+using PlasticPipe.Client;
+
+namespace Unity.PlasticSCM.Editor
+{
+    internal static class PlasticShutdown
+    {
+        internal static void Shutdown()
+        {
+            mLog.Debug("Shutdown");
+
+            WorkspaceInfo wkInfo = FindWorkspace.InfoForApplicationPath(
+                ApplicationDataPath.Get(), PlasticGui.Plastic.API);
+
+            WorkspaceFsNodeReaderCachesCleaner.Shutdown();
+
+            PlasticPlugin.Shutdown();
+            PlasticApp.Dispose(wkInfo);
+
+            ClientConnectionPool.Shutdown();
+        }
+
+        static readonly ILog mLog = PlasticApp.GetLogger("PlasticShutdown");
+    }
+}

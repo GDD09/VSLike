@@ -1,3 +1,39 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:919e6cfa7a9ddce7765297fe0e1fcdb310ca524f1696ccf7bf0f08e491d9ed52
-size 990
+using UnityEngine;
+
+namespace UnityEditor.U2D.Aseprite
+{
+    internal class AsepriteImportData : ScriptableObject
+    {
+        [SerializeField]
+        int m_ImportedTextureWidth;
+        public int importedTextureWidth
+        {
+            get => m_ImportedTextureWidth;
+            set => m_ImportedTextureWidth = value;
+        }
+        
+        [SerializeField]
+        int m_ImportedTextureHeight;
+        public int importedTextureHeight
+        {
+            get => m_ImportedTextureHeight;
+            set => m_ImportedTextureHeight = value;
+        }
+
+        [SerializeField]
+        int m_TextureActualHeight;
+        public int textureActualHeight
+        {
+            get => m_TextureActualHeight;
+            set => m_TextureActualHeight = value;
+        }
+
+        [SerializeField]
+        int m_TextureActualWidth;
+        public int textureActualWidth
+        {
+            get => m_TextureActualWidth;
+            set => m_TextureActualWidth = value;
+        }
+    }
+}

@@ -1,3 +1,36 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:31aa8e93341f9a9603fc939aec7f4ede66aa2260d9eed40eb28be60689b4c9f1
-size 1273
+using UnityEngine;
+
+namespace UnityEditor.U2D.Aseprite.Common
+{
+    internal static class InternalEditorBridge
+    {
+        public static bool DoesHardwareSupportsFullNPOT()
+        {
+            return ShaderUtil.hardwareSupportsFullNPOT;
+        }
+
+        public static Texture2D CreateTemporaryDuplicate(Texture2D tex, int width, int height)
+        {
+            return SpriteUtility.CreateTemporaryDuplicate(tex, width, height);
+        }
+
+        public static void ShowSpriteEditorWindow(Object obj = null)
+        {
+            SpriteUtilityWindow.ShowSpriteEditorWindow(obj);
+        }
+
+        public static void ApplySpriteEditorWindow()
+        {
+            SpriteUtilityWindow.ApplySpriteEditorWindow();
+        }
+
+        public static void AddManagedGameObject(this PreviewRenderUtility scene, GameObject go) => scene.AddManagedGO(go);
+        
+        public static void RefreshInspectors() => InspectorWindow.RefreshInspectors(); 
+        
+        public static void GenerateOutlineFromSprite(Sprite sprite, float detail, byte alphaTolerance, bool holeDetection, out Vector2[][] paths)
+        {
+            UnityEditor.Sprites.SpriteUtility.GenerateOutlineFromSprite(sprite, detail, alphaTolerance, holeDetection, out paths);
+        }        
+    }
+}

@@ -1,3 +1,22 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:34106ad61840b8d6fdf54133bc72999b38ead495dd7ee88118f2ac8e7c558176
-size 257
+* {
+    align-self: center;
+}
+
+#Header {
+    -unity-font-style: bold;
+    padding-top: 10px;
+    padding-bottom: 5px;
+}
+
+.SubElement {
+    margin-left: 15px;
+}
+
+#ButtonArea {
+    padding-top: 10px;
+    flex-direction: row;
+}
+
+Button {
+    font-size: 14px;
+}

@@ -1,3 +1,46 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:bf7992f58583252660c21e25d82eb6f98afd3197b5cd55ca4c2e09dbe9677b30
-size 1236
+﻿using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.U2D.Animation;
+
+#if UGUI_ENABLED
+using UnityEngine.UI;
+#endif
+
+namespace Unity.U2D.Animation.Sample
+{
+    internal class SwapFullSkin : MonoBehaviour
+    {
+        public SpriteLibraryAsset[] spriteLibraries;
+        public SpriteLibrary spriteLibraryTarget;
+        
+#if UGUI_ENABLED        
+        public Dropdown dropDownSelection;
+#endif
+
+        // Start is called before the first frame update
+        void Start()
+        {
+            UpdateSelectionChoice();
+        }
+
+        void OnDropDownValueChanged(int value)
+        {
+            spriteLibraryTarget.spriteLibraryAsset = spriteLibraries[value];
+        }
+
+        internal void UpdateSelectionChoice()
+        {
+#if UGUI_ENABLED            
+            dropDownSelection.ClearOptions();
+            var options = new List<Dropdown.OptionData>(spriteLibraries.Length);
+            for (int i = 0; i < spriteLibraries.Length; ++i)
+            {
+                options.Add(new Dropdown.OptionData(spriteLibraries[i].name));
+            }
+            dropDownSelection.options = options;
+            dropDownSelection.onValueChanged.AddListener(OnDropDownValueChanged);
+#endif
+        }
+    }
+
+}

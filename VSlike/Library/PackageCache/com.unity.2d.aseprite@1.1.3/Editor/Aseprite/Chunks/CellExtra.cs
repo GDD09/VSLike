@@ -1,3 +1,15 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:f23a6e76804daaa22ec74cd66eeb3c2626607df65c85c7ba28cd22c6d1d8d4f5
-size 453
+using System.IO;
+
+namespace UnityEditor.U2D.Aseprite
+{
+    /// <summary>
+    /// Parsed representation of an Aseprite CellExtra chunk.
+    /// </summary>
+    /// <note>Not supported yet.</note>
+    internal class CellExtra : BaseChunk
+    {
+        public override ChunkTypes chunkType => ChunkTypes.CellExtra;
+        internal CellExtra(uint chunkSize) : base(chunkSize) { }
+        protected override void InternalRead(BinaryReader reader) { }
+    }
+}

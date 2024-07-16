@@ -1,3 +1,16 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:506bd2f52b3be73f41d420b4f9b75521f000af7f57d79be930e56b0cc17f6dad
-size 444
+using System.IO;
+
+namespace UnityEditor.U2D.Aseprite
+{
+    /// <summary>
+    /// Parsed representation of an Aseprite Mask chunk.
+    /// </summary>
+    /// <note>Not supported yet.</note>
+    internal class MaskChunk : BaseChunk
+    {
+        public override ChunkTypes chunkType => ChunkTypes.Mask;
+
+        internal MaskChunk(uint chunkSize) : base(chunkSize) { }
+        protected override void InternalRead(BinaryReader reader) { }
+    }
+}

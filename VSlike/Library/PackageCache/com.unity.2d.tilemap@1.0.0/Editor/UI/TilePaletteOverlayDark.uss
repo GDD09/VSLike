@@ -1,3 +1,7 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:c36c34feab16d0ca54b501b067a8e4f9a29bf022539611e246671ddb98067a52
-size 217
+.unity-tilepalette-brushinspectorpopup
+{
+    border-left-color: rgb(112, 112, 112);
+    border-right-color: rgb(112, 112, 112);
+    border-top-color: rgb(112, 112, 112);
+    border-bottom-color: rgb(112, 112, 112);
+}

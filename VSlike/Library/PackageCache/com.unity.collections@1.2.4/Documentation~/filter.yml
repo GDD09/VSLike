@@ -1,3 +1,20 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:6cc5d46d192a9fa548ff31126bfca2bb166a4a8317c45ac42b918d283767516d
-size 456
+apiRules:
+  - exclude:
+      # inherited Object methods
+      uidRegex: ^System\.Object\..*$
+      type: Method
+  - exclude:
+      # mentioning types from System.* namespace
+      uidRegex: ^System\..*$
+      type: Type
+  - exclude:
+      hasAttribute:
+        uid: System.ObsoleteAttribute
+      type: Member
+  - exclude:
+      hasAttribute:
+        uid: System.ObsoleteAttribute
+      type: Type
+  - exclude:
+      uidRegex: Tests$
+      type: Namespace

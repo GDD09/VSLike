@@ -1,3 +1,16 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:fd3f21b8c3247b9c56c195aff8610127c7843d44291242f200ba54b980d61b5a
-size 448
+using System.IO;
+
+namespace UnityEditor.U2D.Aseprite
+{
+    /// <summary>
+    /// Parsed representation of an Aseprite Slice chunk.
+    /// </summary>
+    /// <note>Not supported yet.</note>
+    internal class SliceChunk : BaseChunk
+    {
+        public override ChunkTypes chunkType => ChunkTypes.Slice;
+
+        internal SliceChunk(uint chunkSize) : base(chunkSize) { }
+        protected override void InternalRead(BinaryReader reader) { }
+    }
+}

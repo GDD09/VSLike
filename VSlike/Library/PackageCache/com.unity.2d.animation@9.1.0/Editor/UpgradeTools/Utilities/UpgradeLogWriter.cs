@@ -1,3 +1,45 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:c8b8646224c15392036d4edc698c5ec81760bc66c567faf87ae8e0b85856cf40
-size 1300
+using System;
+using System.IO;
+using System.Text;
+using UnityEngine;
+
+namespace UnityEditor.U2D.Animation.Upgrading
+{
+    internal static class UpgradeLogWriter
+    {
+        const string k_LogSavePath = "/Logs/";        
+        
+        public static string Generate(string content)
+        {
+            if (string.IsNullOrEmpty(content))
+                return string.Empty;
+            
+            var path = Path.GetDirectoryName(Application.dataPath);
+            path = Path.Join(path, k_LogSavePath);
+
+            if (!Directory.Exists(path))
+                Directory.CreateDirectory(path);
+
+            var dateStamp = DateTime.Now.Ticks.ToString();
+            var filePath = Path.Join(path, $"AssetUpgradingLog_{dateStamp}.txt");
+
+            content = AddHeaderToContent(content);
+            using (var file = File.CreateText(filePath))
+            {
+                file.Write(content);
+            }
+
+            return filePath;
+        }
+
+        static string AddHeaderToContent(string content)
+        {
+            var sb = new StringBuilder();
+            sb.AppendLine(DateTime.Now.ToString());
+            sb.AppendLine("Asset Upgrading");
+            sb.AppendLine("---------------");
+            sb.AppendLine(content);
+            return sb.ToString();
+        }
+    }
+}

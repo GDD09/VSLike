@@ -1,3 +1,39 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:1de3c3ef6317dda60d8a96157f6b9632ebe2a895283ba6eb3cd9b55100fe4568
-size 1457
+using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
+
+namespace UnityEditor.U2D.Aseprite
+{
+    internal class AsepriteImporterEditorExternalData : ScriptableObject
+    {
+        [SerializeField]
+        public List<TextureImporterPlatformSettings> platformSettings = new List<TextureImporterPlatformSettings>();
+
+        public void Init(AsepriteImporter importer, IList<TextureImporterPlatformSettings> platformSettingsNeeded)
+        {
+            var importerPlatformSettings = importer.GetAllPlatformSettings();
+            
+            for (var i = 0; i < importerPlatformSettings.Length; ++i)
+            {
+                var tip = importerPlatformSettings[i];
+                var setting = platformSettings.FirstOrDefault(x => x.name == tip.name);
+                if (setting == null)
+                {
+                    TextureImporterUtilities.UpdateWithDefaultSettings(ref tip);
+                    platformSettings.Add(tip);
+                }
+            }
+            
+            for (var i = 0; i < platformSettingsNeeded.Count; ++i)
+            {
+                var ps = platformSettingsNeeded[i];
+                var setting = platformSettings.FirstOrDefault(x => x.name == ps.name);
+                if (setting == null)
+                {
+                    TextureImporterUtilities.UpdateWithDefaultSettings(ref ps);
+                    platformSettings.Add(ps);
+                }
+            }
+        }
+    }    
+}
