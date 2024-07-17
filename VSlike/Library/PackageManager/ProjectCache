@@ -5,16 +5,16 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 638566885083572861
-    m_Hash: 512533485
+      ticks: 638567110512173412
+    m_Hash: 355958252
   m_LockFileStatus:
     m_FilePath: A:/Application Program/Repositories/VSLike/VSlike/Packages/packages-lock.json
     m_PathExists: 1
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 638566885084354317
-    m_Hash: 3154751385
+      ticks: 638567110512173412
+    m_Hash: 150022274
 m_EmbeddedPackageManifests:
   m_ManifestsStatus: {}
 m_LocalPackages:
