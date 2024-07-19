@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
-    6
+    protected float attack_damage;
+    protected float cooldown;
     // Start is called before the first frame update
     void Start()
     {
