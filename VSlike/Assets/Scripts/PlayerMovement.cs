@@ -24,8 +24,8 @@ public class PlayerMovement : MonoBehaviour
     }
     Vector3 getInputVector()
     {
-        float horizontal_vector = Input.GetAxis("Horizontal");
-        float vertical_vector = Input.GetAxis("Vertical");
+        float horizontal_vector = Input.GetAxisRaw("Horizontal");
+        float vertical_vector = Input.GetAxisRaw("Vertical");
         Vector3 input_vector = new Vector3(horizontal_vector, vertical_vector, 0);
         Debug.Log(input_vector);
         return input_vector;
