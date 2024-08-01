@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    private int HP = 1;
     public float speed;
     public Rigidbody2D target;
 
@@ -14,6 +15,7 @@ public class Enemy : MonoBehaviour
 
     void Awake()
     {
+        target = GameObject.Find("Player").GetComponent<Rigidbody2D>();
         rigid = GetComponent<Rigidbody2D>();
         spriter = GetComponent<SpriteRenderer>();
     }

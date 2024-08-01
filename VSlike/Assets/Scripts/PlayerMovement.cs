@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     //Rigidbody2D rb2d;
-    Transform transform;
+    new Transform transform;
     [SerializeField]
     private float speed = 2f;
     // Start is called before the first frame update
@@ -19,7 +19,6 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         Vector3 v = getInputVector();
-        Debug.Log(v);
         transform.transform.position += v*speed*Time.deltaTime;
     }
     Vector3 getInputVector()
@@ -27,7 +26,7 @@ public class PlayerMovement : MonoBehaviour
         float horizontal_vector = Input.GetAxisRaw("Horizontal");
         float vertical_vector = Input.GetAxisRaw("Vertical");
         Vector3 input_vector = new Vector3(horizontal_vector, vertical_vector, 0);
-        Debug.Log(input_vector);
+        //Debug.Log(input_vector);
         return input_vector;
     }
 }
