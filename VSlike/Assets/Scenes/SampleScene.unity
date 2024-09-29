@@ -470,10 +470,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 519420028}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7409ac7002281e845b17ae1dbc2b52c5, type: 3}
+  m_Script: {fileID: 11500000, guid: f9a3e78c63091d5459d5f6ac7a0164db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player_transform: {fileID: 281111238}
+  focusTarget: {fileID: 281111236}
+  cameraSpeed: 0.25
+  offset: {x: 0, y: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
